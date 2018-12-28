@@ -7,16 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/project")
@@ -31,7 +27,7 @@ public class ProjectController {
     /*
         @Valid annotation provides a better explanation of error, and instead of error 500 we get error 400 which is more accurate
         BindingResult result - will hold the result of response. If something went wrong, the result.hasErrors() method will return true.
-        We sue <?> generic type here as we want to return String if the request was invalid, but we also want to return ResponseEntity<Project> if everything went good
+        We use <?> generic type here as we want to return String if the request was invalid, but we also want to return ResponseEntity<Project> if everything went good
      */
     @PostMapping("")    // this will handle the upcoming request
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {

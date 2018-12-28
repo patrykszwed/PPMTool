@@ -1,6 +1,7 @@
 package com.botq.ppmtool.services;
 
 import com.botq.ppmtool.domain.Project;
+import com.botq.ppmtool.exceptions.ProjectIdException;
 import com.botq.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     public Project saveOrUpdateProject(Project project){
-
-        // Logic
-
-        return projectRepository.save(project);
+        try{
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase()); // we don't want to have ambiguity, so we force to use upper cases
+            return projectRepository.save(project);
+        }catch(Exception e){
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase() + "' already exists");
+        }
     }
 }
