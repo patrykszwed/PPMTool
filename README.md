@@ -1,3 +1,3 @@
 # PPMTool - Project Management Tool
 
-Project created on the course on Udemy
+Project created on the course on Udemy.
