@@ -14,6 +14,7 @@ import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping("/api/project")
+@CrossOrigin
 public class ProjectController {
 
     @Autowired
