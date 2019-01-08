@@ -1,5 +1,6 @@
 package com.botq.ppmtool.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,10 @@ public class ProjectTask {
     private Date dueDate;
 
     // ManyToOne with Backlog
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)  // CascadeType.REFRESH - we can delete ProjectTask, and just refresh the Backlog state without deleting it
+    @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
+    @JsonIgnore
+    private Backlog backlog;
 
     @Column(updatable = false)
     private String projectIdentifier;
